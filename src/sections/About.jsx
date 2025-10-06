@@ -47,102 +47,47 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-24 bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            About Me
+          <h2 className="text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">
+            About
           </h2>
-          <div className="w-20 h-1 bg-gray-900 mx-auto"></div>
+          <div className="w-12 h-1 bg-gray-900 mx-auto rounded-full"></div>
+          <p className="text-lg text-gray-600 max-w-xl mx-auto leading-relaxed mt-4 mb-2">
+            Full stack developer passionate about crafting clean, scalable digital solutions. I focus on impactful experiences and minimal, purposeful design.
+          </p>
         </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* About Text */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              Passionate Full Stack Developer
-            </h3>
-            <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
-              <p>
-                With <strong>1.5+ years of professional experience</strong> (2+ years including part-time), 
-                I specialize in building scalable, secure, and high-performance web and mobile applications.
-              </p>
-              <p>
-                My expertise spans across <strong>JavaScript, React.js, Next.js, PHP, and API design</strong>, 
-                with a strong foundation in data structures, algorithms, and distributed systems.
-              </p>
-              <p>
-                I'm experienced in automated testing, CI/CD pipelines, and Agile development methodologies. 
-                I have a proven track record of delivering customer-focused features, improving system 
-                performance, and taking ownership of components end-to-end.
-              </p>
-              <p>
-                I'm passionate about creating intuitive user experiences and writing clean, maintainable code 
-                that makes a difference in people's lives.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Highlights Grid */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
-          >
-            {highlights.map((highlight, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                className="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:border-gray-200 transition-all duration-300"
-              >
-                <div className="text-gray-900 mb-3">
-                  {highlight.icon}
-                </div>
-                <h4 className="font-semibold text-gray-900 mb-2">
-                  {highlight.title}
-                </h4>
-                <p className="text-gray-600 text-sm">
-                  {highlight.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6"
         >
-          <div className="text-center">
-            <div className="text-3xl font-bold text-gray-900 mb-2">1.5+</div>
-            <div className="text-gray-600">Years Experience</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-gray-900 mb-2">50+</div>
-            <div className="text-gray-600">Projects Completed</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-gray-900 mb-2">99%</div>
-            <div className="text-gray-600">Client Satisfaction</div>
-          </div>
+          {highlights.map((item, idx) => (
+            <motion.div
+              key={item.title}
+              variants={itemVariants}
+              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7 flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-200"
+            >
+              <div className="mb-2 text-gray-800">
+                {item.icon}
+              </div>
+              <h3 className="text-lg font-bold mb-1 text-gray-900 tracking-tight">
+                {item.title}
+              </h3>
+              <p className="text-sm text-gray-500">
+                {item.description}
+              </p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
