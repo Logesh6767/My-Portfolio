@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, ExternalLink } from 'lucide-react';
+import { Calendar, MapPin, ExternalLink, Briefcase } from 'lucide-react';
 
 const Experience = () => {
   const experiences = [
@@ -10,12 +10,9 @@ const Experience = () => {
       period: "May 2024 - Current",
       type: "Full-time",
       achievements: [
-        "Led development of a client-facing CRM system using Next.js and PHP, leading to 30% reduction in feedback loops",
-        "Designed and deployed RESTful APIs hosted on Vercel, improving backend response times by 40%",
-        "Built robust Cypress test automation suite, reducing regression bugs by 50%",
-        "Developed AI-integrated nutrition analysis app using React.js and Gemini AI API",
-        "Created Android-native applications using React.js + Capacitor with serverless backend",
-        "Enhanced UI/UX with Figma + Tailwind CSS, increasing user satisfaction scores by 35%"
+        "Led development of a client-facing CRM system using Next.js and PHP, leading to 30% reduction in feedback loops.",
+        "Designed and deployed RESTful APIs hosted on Vercel, improving backend response times by 40%.",
+        "Built a robust Cypress test automation suite, reducing regression bugs by 50%.",
       ],
       technologies: ["Next.js", "React.js", "PHP", "Cypress", "Tailwind CSS", "Vercel", "Gemini AI"]
     },
@@ -26,106 +23,114 @@ const Experience = () => {
       period: "October 2023 - April 2024",
       type: "Part-time",
       achievements: [
-        "Contributed to client-facing CRM app development using Next.js + PHP",
-        "Debugged and stabilized legacy VB.NET CRM system, resolving 20+ production bugs",
-        "Designed mobile-first UI prototypes in Figma, resulting in 40% boost in user engagement",
-        "Implemented key features and optimized workflows for better performance"
+        "Contributed to client-facing CRM app development using Next.js + PHP.",
+        "Debugged and stabilized a legacy VB.NET CRM system, resolving 20+ production bugs.",
+        "Designed mobile-first UI prototypes in Figma, resulting in a 40% boost in user engagement.",
       ],
       technologies: ["Next.js", "PHP", "VB.NET", "Figma", "CRM Systems"]
     }
   ];
 
-  const containerVariants = {
+  const timelineVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3
+        staggerChildren: 0.2,
+        delayChildren: 0.1
       }
     }
   };
 
-  const cardVariants = {
+  const itemVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6
+        duration: 0.6,
+        ease: "easeOut"
       }
     }
   };
 
   return (
     <section id="experience" className="py-24 bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-8">
+      <div className="container mx-auto px-4 sm:px-8 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="text-center mb-16"
         >
           <h2 className="text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">
-            Experience
+            Work Experience
           </h2>
-          <div className="w-12 h-1 bg-gray-900 mx-auto rounded-full"></div>
-          <p className="text-lg text-gray-600 max-w-xl mx-auto leading-relaxed mt-4 mb-2">
-            Delivering impactful results and scalable solutions across diverse projects.
+          <div className="w-20 h-1 bg-gray-800 mx-auto rounded-full"></div>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mt-5">
+            A timeline of my professional journey and key contributions.
           </p>
         </motion.div>
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="relative">
-            {/* Center vertical timeline line */}
-            <div className="absolute left-1/2 top-0 -translate-x-1/2 w-1 h-full bg-gray-200"></div>
-            <div className="flex flex-col gap-20">
-              {experiences.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  variants={cardVariants}
-                  className="relative flex flex-col md:flex-row items-stretch min-h-[180px]"
-                >
-                  {/* Timeline dot centered */}
-                  <div className="absolute left-1/2 top-10 -translate-x-1/2 w-7 h-7 bg-gray-900 rounded-full flex items-center justify-center z-10 shadow-lg">
-                    <ExternalLink size={16} className="text-white" />
+
+        <div className="relative">
+          <div className="absolute left-4 md:left-1/2 top-2 h-full w-0.5 bg-gray-200" aria-hidden="true"></div>
+
+          <motion.div
+            variants={timelineVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="space-y-12"
+          >
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="relative flex items-start group"
+              >
+                <div className="absolute left-4 md:left-1/2 top-2 -translate-x-1/2 bg-white p-1 rounded-full">
+                  <div className="w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center text-white">
+                    <Briefcase size={14} />
                   </div>
-                  {/* Left side: role, company, location, etc */}
-                  <div className="md:w-1/2 pr-0 md:pr-12 flex flex-col justify-center md:items-end text-right md:text-right mb-10 md:mb-0">
-                    <h4 className="text-xl font-semibold text-gray-900 mb-2 tracking-wide">
-                      {exp.title}
-                    </h4>
-                    <span className={`text-xs font-medium px-3 py-1 rounded-full mb-3 inline-block tracking-wide ${exp.type === 'Full-time' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>{exp.type}</span>
-                    <div className="flex flex-col gap-2 text-gray-600 text-base tracking-wide">
-                      <span className="flex items-center gap-2 justify-end"><ExternalLink size={16} />{exp.company}</span>
-                      <span className="flex items-center gap-2 justify-end"><MapPin size={16} />{exp.location}</span>
-                      <span className="flex items-center gap-2 justify-end text-gray-500"><Calendar size={16} />{exp.period}</span>
+                </div>
+
+                <div className="w-full flex flex-col md:flex-row items-start gap-x-8">
+                  {/* Meta Info Block (always left) */}
+                  <div className="w-full md:w-1/2 flex md:justify-end">
+                    <div className="md:max-w-sm w-full pl-12 md:pr-8 md:pl-0 md:text-right">
+                      <span className="text-xs font-medium px-3 py-1 rounded-full mb-2 inline-block tracking-wide bg-gray-100 text-gray-700">
+                        {exp.type}
+                      </span>
+                      <h3 className="text-xl font-bold text-gray-900">{exp.title}</h3>
+                      <div className="flex items-center gap-2 mt-1 text-gray-600 md:justify-end">
+                        <ExternalLink size={14} /> {exp.company}
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-gray-500 mt-1 md:justify-end">
+                        <MapPin size={14} /> {exp.location}
+                      </div>
+                      <p className="text-sm font-medium text-gray-500 mt-2">
+                        {exp.period}
+                      </p>
                     </div>
                   </div>
-                  {/* Right side: achievements and technologies in a card */}
-                  <div className="md:w-3/5 w-full pl-0 md:pl-12 flex flex-col justify-center">
-                    <div className="bg-white rounded-xl p-8 border border-gray-100 shadow-md w-full max-w-xl md:max-w-full mx-auto">
-                      <div className="mb-4">
-                        <h5 className="text-lg font-semibold text-gray-900 mb-3 tracking-wide">Achievements</h5>
-                        <ul className="space-y-3">
-                          {exp.achievements.map((achievement, idx) => (
-                            <li key={idx} className="flex items-start gap-3">
-                              <span className="mt-2 text-gray-900 text-lg">&bull;</span>
-                              <span className="text-gray-700 text-base leading-relaxed tracking-wide">{achievement}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h5 className="text-lg font-semibold text-gray-900 mb-2 tracking-wide">Technologies</h5>
-                        <div className="flex flex-wrap gap-3">
+                  {/* Card Block (always right) */}
+                  <div className="w-full md:w-1/2 flex md:justify-start">
+                    <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-lg hover:scale-[1.01] transition-all duration-300 w-full ml-12 md:ml-8">
+                      <h4 className="text-md font-semibold text-gray-800 mb-3">Key Achievements</h4>
+                      <ul className="space-y-2 list-disc list-inside text-gray-600 text-sm leading-relaxed">
+                        {exp.achievements.map((achievement, idx) => (
+                          <li key={idx}>{achievement}</li>
+                        ))}
+                      </ul>
+                      <div className="mt-5 pt-4 border-t border-gray-100">
+                        <h5 className="text-md font-semibold text-gray-800 mb-3">Technologies</h5>
+                        <div className="flex flex-wrap gap-2">
                           {exp.technologies.map((tech, idx) => (
-                            <span key={idx} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors duration-200 tracking-wide">
+                            <span 
+                              key={idx} 
+                              className="px-3 py-1 bg-white text-gray-700 border border-gray-300 rounded-full text-xs font-semibold hover:bg-gray-100 transition-colors duration-200 cursor-default"
+                            >
                               {tech}
                             </span>
                           ))}
@@ -133,11 +138,11 @@ const Experience = () => {
                       </div>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

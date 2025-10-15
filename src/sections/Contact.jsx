@@ -31,13 +31,13 @@ const Contact = () => {
       icon: <Phone size={20} />,
       title: "Phone",
       value: "+91 7010198963",
-      link: "tel:7010198963"
+      link: "tel:+917010198963"
     },
     {
       icon: <Mail size={20} />,
       title: "Email",
       value: "logeshwaranvelmurugan@gmail.com",
-      link: "mailto:logeshwaranvelmurugan@gmail.com"
+      link: "https://mail.google.com/mail/?view=cm&fs=1&to=logeshwaranvelmurugan@gmail.com"
     },
     {
       icon: <MapPin size={20} />,
@@ -56,12 +56,12 @@ const Contact = () => {
     {
       icon: <Github size={24} />,
       name: "GitHub", 
-      url: "https://github.com"
+      url: "https://github.com/Logesh6767"
     }
   ];
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -106,22 +106,31 @@ const Contact = () => {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-center space-x-4"
                 >
-                  <div className="p-3 bg-gray-100 rounded-lg">
-                    {info.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{info.title}</h4>
+                  <div className="flex items-center space-x-4">
                     {info.link !== '#' ? (
                       <motion.a
                         href={info.link}
-                        whileHover={{ scale: 1.05 }}
-                        className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                        target={info.title === "Email" ? "_blank" : "_self"}
+                        rel={info.title === "Email" ? "noopener noreferrer" : ""}
+                        className="block"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ type: "spring", stiffness: 300 }}
                       >
-                        {info.value}
+                        <div className="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                          {info.icon}
+                        </div>
                       </motion.a>
                     ) : (
-                      <span className="text-gray-600">{info.value}</span>
+                      <div className="p-3 bg-gray-100 rounded-lg">
+                        {info.icon}
+                      </div>
                     )}
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{info.title}</h4>
+                      <span className="text-gray-600">
+                        {info.value}
+                      </span>
+                    </div>
                   </div>
                 </motion.div>
               ))}

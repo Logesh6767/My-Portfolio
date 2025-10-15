@@ -65,7 +65,9 @@ const Hero = () => {
             className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16"
           >
             <motion.a
-              href="#contact"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=logeshwaranvelmurugan@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-gray-900 text-white px-8 py-3 rounded-lg font-medium flex items-center space-x-2 hover:bg-gray-800 transition-colors duration-200"
@@ -74,14 +76,16 @@ const Hero = () => {
               <span>Get In Touch</span>
             </motion.a>
             
-            <motion.button
+            <motion.a
+              href="/assets/Logeshwaran V Full Stack Developer.pdf"
+              download
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-medium flex items-center space-x-2 hover:border-gray-900 hover:text-gray-900 transition-colors duration-200"
             >
               <Download size={20} />
               <span>Download Resume</span>
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* Contact info */}
@@ -101,7 +105,9 @@ const Hero = () => {
             </motion.a>
             
             <motion.a
-              href="mailto:logeshwaranvelmurugan@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=logeshwaranvelmurugan@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               className="flex items-center space-x-2 hover:text-gray-900 transition-colors duration-200"
             >
