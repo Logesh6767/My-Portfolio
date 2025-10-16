@@ -1,9 +1,3 @@
-// Vercel Serverless Function to send emails
-// This uses Nodemailer with Gmail
-// Make sure to set environment variables in Vercel:
-// - EMAIL_USER: your Gmail address
-// - EMAIL_PASS: your Gmail App Password (not regular password)
-
 const nodemailer = require('nodemailer');
 
 module.exports = async (req, res) => {

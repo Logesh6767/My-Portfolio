@@ -85,10 +85,46 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-          <p className="text-gray-400">
-            © {currentYear} Logeshwaran V. All rights reserved.
-          </p>
+        <div className="border-t border-gray-700 mt-8 pt-8">
+          {/* Mobile Layout - Stacked */}
+          <div className="flex flex-col items-center gap-3 lg:hidden">
+            <p className="text-gray-300 text-sm italic">
+              Cooking ideas into seamless digital experiences.
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-2 text-xs text-gray-400">
+              <span>Built with</span>
+              <span className="text-gray-300 font-semibold">React.js</span>
+              <span>•</span>
+              <span className="text-gray-300 font-semibold">Vite</span>
+              <span>•</span>
+              <span className="text-gray-300 font-semibold">Tailwind CSS</span>
+              <span>•</span>
+              <span className="text-gray-300 font-semibold">Framer Motion</span>
+            </div>
+            <p className="text-gray-400 text-xs">
+              © {currentYear} Logeshwaran V. All rights reserved.
+            </p>
+          </div>
+
+          {/* Desktop Layout - Single Row */}
+          <div className="hidden lg:flex lg:justify-between lg:items-center lg:gap-8 text-sm">
+            <p className="text-gray-400 whitespace-nowrap">
+              © {currentYear} Logeshwaran V. All rights reserved.
+            </p>
+            <p className="text-gray-300 italic flex-shrink-0">
+              Cooking ideas into seamless digital experiences.
+            </p>
+            <div className="flex items-center gap-2 text-gray-400 whitespace-nowrap">
+              <span>Built with</span>
+              <span className="text-gray-300 font-semibold">React.js</span>
+              <span>•</span>
+              <span className="text-gray-300 font-semibold">Vite</span>
+              <span>•</span>
+              <span className="text-gray-300 font-semibold">Tailwind CSS</span>
+              <span>•</span>
+              <span className="text-gray-300 font-semibold">Framer Motion</span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

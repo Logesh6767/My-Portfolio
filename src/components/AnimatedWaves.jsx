@@ -6,11 +6,11 @@ const AnimatedWaves = () => {
       {/* Wave Layer 1 - Primary wave */}
       <motion.div
         animate={{
-          x: [-60, 60, -60],
-          scale: [1, 1.15, 1],
+          x: ['-1%', '1%', '-1%'],
+          scale: [1, 1.01, 1],
         }}
         transition={{
-          duration: 12,
+          duration: 8,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -18,7 +18,7 @@ const AnimatedWaves = () => {
         style={{ width: '120%', left: '-10%' }}
       >
         <svg
-          viewBox="0 0 1200 320"
+          viewBox="0 0 1440 320"
           className="absolute bottom-0 w-full h-full"
           preserveAspectRatio="none"
         >
@@ -39,20 +39,20 @@ const AnimatedWaves = () => {
       {/* Wave Layer 2 - Secondary wave */}
       <motion.div
         animate={{
-          x: [80, -100, 80],
-          scale: [1.1, 0.95, 1.1],
+          x: ['1.5%', '-1.5%', '1.5%'],
+          scale: [1.01, 0.99, 1.01],
         }}
         transition={{
-          duration: 16,
+          duration: 10,
           repeat: Infinity,
           ease: "easeInOut",
-          delay: 2,
+          delay: 1.5,
         }}
         className="absolute inset-0 opacity-30"
         style={{ width: '120%', left: '-10%' }}
       >
         <svg
-          viewBox="0 0 1200 320"
+          viewBox="0 0 1440 320"
           className="absolute bottom-0 w-full h-full"
           preserveAspectRatio="none"
         >
@@ -73,20 +73,20 @@ const AnimatedWaves = () => {
       {/* Wave Layer 3 - Tertiary wave */}
       <motion.div
         animate={{
-          x: [-50, 90, -50],
-          scale: [1, 1.08, 1],
+          x: ['-1%', '2%', '-1%'],
+          scale: [1, 1.015, 1],
         }}
         transition={{
-          duration: 20,
+          duration: 13,
           repeat: Infinity,
           ease: "easeInOut",
-          delay: 4,
+          delay: 3,
         }}
         className="absolute inset-0 opacity-20"
         style={{ width: '120%', left: '-10%' }}
       >
         <svg
-          viewBox="0 0 1200 320"
+          viewBox="0 0 1440 320"
           className="absolute bottom-0 w-full h-full"
           preserveAspectRatio="none"
         >
@@ -107,20 +107,20 @@ const AnimatedWaves = () => {
       {/* Wave Layer 4 - Foreground subtle wave */}
       <motion.div
         animate={{
-          x: [40, -80, 40],
-          scale: [1.03, 0.97, 1.03],
+          x: ['1%', '-1.5%', '1%'],
+          scale: [1.005, 0.995, 1.005],
         }}
         transition={{
-          duration: 24,
+          duration: 15,
           repeat: Infinity,
           ease: "easeInOut",
-          delay: 6,
+          delay: 4.5,
         }}
         className="absolute inset-0 opacity-15"
         style={{ width: '120%', left: '-10%' }}
       >
         <svg
-          viewBox="0 0 1200 320"
+          viewBox="0 0 1440 320"
           className="absolute bottom-0 w-full h-full"
           preserveAspectRatio="none"
         >
