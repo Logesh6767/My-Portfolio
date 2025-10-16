@@ -326,20 +326,16 @@ const Skills = () => {
               <motion.span
                 key={index}
                 variants={itemVariants}
-                whileHover={{ scale: 1.08, y: -4 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400 }}
-                className="group relative bg-gradient-to-br from-white to-gray-50 px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg sm:rounded-xl border-2 border-gray-200 text-gray-800 font-semibold hover:text-gray-900 hover:shadow-lg transition-all duration-300 cursor-default overflow-hidden touch-manipulation"
+                className="group relative bg-gradient-to-br from-white to-gray-50 px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg sm:rounded-xl border-2 border-gray-200 text-gray-800 font-semibold hover:text-gray-900 hover:border-gray-400 hover:shadow-lg transition-all duration-300 cursor-default touch-manipulation"
               >
                 {/* Small decorative element */}
                 <div className="absolute top-0 right-0 w-6 sm:w-8 h-6 sm:h-8 bg-gradient-to-bl from-gray-900/10 to-transparent rounded-bl-full scale-0 group-hover:scale-100 transition-transform duration-300"></div>
                 
-                <span className="relative z-10 flex items-center justify-center gap-0 group-hover:gap-1.5 sm:group-hover:gap-2 transition-all duration-300 text-xs sm:text-sm lg:text-base">
-                  {/* Icon - hidden by default, visible on hover */}
-                  <span className="inline-flex w-0 opacity-0 overflow-hidden group-hover:w-3 sm:group-hover:w-4 group-hover:opacity-100 transition-all duration-300">
-                    {skill.icon}
-                  </span>
-                  <span className="whitespace-nowrap">{skill.name}</span>
+                <span className="relative z-10 flex items-center justify-center text-xs sm:text-sm lg:text-base whitespace-nowrap">
+                  {skill.name}
                 </span>
               </motion.span>
             ))}
