@@ -28,9 +28,23 @@ const Header = () => {
           <motion.button
             onClick={() => smoothScrollTo('home')}
             whileHover={{ scale: 1.05 }}
-            className="font-bold text-xl text-gray-900"
+            className="group relative font-bold text-xl text-gray-900"
           >
-            LV
+            <span className="inline-flex items-center">
+              {/* L - stays fixed */}
+              <span className="inline-block">L</span>
+              
+              {/* ogeshwaran - expands from 0 width */}
+              <span className="inline-block max-w-0 opacity-0 overflow-hidden group-hover:max-w-[7.5rem] group-hover:opacity-100 transition-all duration-500 ease-out whitespace-nowrap">
+                ogeshwaran
+              </span>
+              
+              {/* Space between first and last name */}
+              <span className="inline-block">&nbsp;</span>
+              
+              {/* V - stays fixed */}
+              <span className="inline-block">V</span>
+            </span>
           </motion.button>
 
           {/* Desktop Navigation */}

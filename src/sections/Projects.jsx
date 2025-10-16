@@ -108,33 +108,42 @@ const Projects = () => {
             <motion.div
               key={index}
               variants={cardVariants}
-              whileHover={{ y: -5 }}
-              className="bg-gray-50 rounded-xl p-8 border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300"
+              whileHover={{ y: -10, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="group relative bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl p-8 border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
             >
-              <div className="flex items-center justify-between mb-6">
+              {/* Decorative gradient overlay - different position for variety */}
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-gray-900/5 to-transparent rounded-tr-full scale-0 opacity-0 -translate-x-12 translate-y-12 group-hover:scale-100 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 ease-out"></div>
+              
+              <div className="flex items-center justify-between mb-6 relative z-10">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-gray-900 text-white rounded-lg">
+                  <motion.div 
+                    className="p-3 bg-gradient-to-br from-gray-900 to-gray-700 text-white rounded-xl shadow-md group-hover:shadow-xl transition-all duration-300"
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                  >
                     {project.icon}
-                  </div>
-                  <span className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                  </motion.div>
+                  <span className="text-sm font-bold text-gray-600 uppercase tracking-wider">
                     {project.category}
                   </span>
                 </div>
               </div>
 
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-gray-800 transition-colors duration-300 relative z-10">
                 {project.title}
               </h3>
 
-              <p className="text-gray-600 mb-6 leading-relaxed">
+              <p className="text-gray-600 mb-6 leading-relaxed relative z-10">
                 {project.description}
               </p>
 
-              <div className="mb-6">
-                <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
+              <div className="mb-6 relative z-10">
+                <h4 className="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider flex items-center">
+                  <div className="w-1 h-4 bg-gray-900 rounded-full mr-2"></div>
                   Key Features
                 </h4>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {project.features.map((feature, idx) => (
                     <motion.li
                       key={idx}
@@ -142,17 +151,18 @@ const Projects = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: idx * 0.1 }}
-                      className="flex items-center space-x-2 text-gray-600"
+                      className="flex items-start space-x-3 text-gray-600 group/item"
                     >
-                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
-                      <span className="text-sm">{feature}</span>
+                      <div className="w-2 h-2 bg-gray-800 rounded-full mt-1.5 group-hover/item:scale-125 transition-transform duration-200"></div>
+                      <span className="text-sm leading-relaxed">{feature}</span>
                     </motion.li>
                   ))}
                 </ul>
               </div>
 
-              <div className="mb-6">
-                <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
+              <div className="mb-6 relative z-10">
+                <h4 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wider flex items-center">
+                  <div className="w-1 h-4 bg-gray-900 rounded-full mr-2"></div>
                   Technologies
                 </h4>
                 <div className="flex flex-wrap gap-2">
@@ -163,7 +173,8 @@ const Projects = () => {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: idx * 0.05 }}
-                      className="px-3 py-1 bg-white text-gray-700 rounded-full text-xs font-medium border border-gray-200"
+                      whileHover={{ scale: 1.02 }}
+                      className="px-3 py-1.5 bg-white text-gray-700 rounded-lg text-xs font-semibold border border-gray-300 shadow-sm hover:bg-gray-50 hover:text-gray-900 transition-all duration-200"
                     >
                       {tech}
                     </motion.span>
@@ -171,22 +182,22 @@ const Projects = () => {
                 </div>
               </div>
 
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 pt-4 border-t border-gray-200 relative z-10">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, x: 2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                  className="flex items-center space-x-2 text-gray-700 hover:text-gray-900 transition-colors duration-200 group/btn"
                 >
-                  <Github size={16} />
-                  <span className="text-sm font-medium">View Code</span>
+                  <Github size={18} className="group-hover/btn:rotate-12 transition-transform duration-200" />
+                  <span className="text-sm font-semibold">View Code</span>
                 </motion.button>
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, x: 2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                  className="flex items-center space-x-2 text-gray-700 hover:text-gray-900 transition-colors duration-200 group/btn"
                 >
-                  <ExternalLink size={16} />
-                  <span className="text-sm font-medium">Live Demo</span>
+                  <ExternalLink size={18} className="group-hover/btn:rotate-12 transition-transform duration-200" />
+                  <span className="text-sm font-semibold">Live Demo</span>
                 </motion.button>
               </div>
             </motion.div>

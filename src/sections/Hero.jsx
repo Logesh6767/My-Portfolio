@@ -73,7 +73,7 @@ const Hero = () => {
               className="bg-gray-900 text-white px-8 py-3 rounded-lg font-medium flex items-center space-x-2 hover:bg-gray-800 transition-colors duration-200"
             >
               <Mail size={20} />
-              <span>Get In Touch</span>
+              <span>Hire Me</span>
             </motion.a>
             
             <motion.a
