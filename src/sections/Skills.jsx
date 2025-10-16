@@ -334,8 +334,12 @@ const Skills = () => {
                 {/* Small decorative element */}
                 <div className="absolute top-0 right-0 w-6 sm:w-8 h-6 sm:h-8 bg-gradient-to-bl from-gray-900/10 to-transparent rounded-bl-full scale-0 group-hover:scale-100 transition-transform duration-300"></div>
                 
-                <span className="relative z-10 flex items-center justify-center text-xs sm:text-sm lg:text-base whitespace-nowrap">
-                  {skill.name}
+                <span className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm lg:text-base whitespace-nowrap">
+                  {/* Icon - hidden on mobile, always visible on desktop */}
+                  <span className="hidden lg:inline-flex w-4 h-4">
+                    {skill.icon}
+                  </span>
+                  <span>{skill.name}</span>
                 </span>
               </motion.span>
             ))}
