@@ -64,13 +64,24 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-12 sm:mb-16 px-4"
           >
+            {/* Mobile: mailto link, Desktop: Gmail web link */}
+            <motion.a
+              href="mailto:logeshwaranvelmurugan@gmail.com"
+              className="block sm:hidden w-full bg-gray-900 text-white px-6 py-3 rounded-lg font-medium flex items-center justify-center space-x-2 hover:bg-gray-800 transition-colors duration-200 touch-manipulation"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Mail size={20} />
+              <span>Hire Me</span>
+            </motion.a>
+            
             <motion.a
               href="https://mail.google.com/mail/?view=cm&fs=1&to=logeshwaranvelmurugan@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
+              className="hidden sm:flex w-auto bg-gray-900 text-white px-6 sm:px-8 py-3 rounded-lg font-medium items-center justify-center space-x-2 hover:bg-gray-800 transition-colors duration-200 touch-manipulation"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full sm:w-auto bg-gray-900 text-white px-6 sm:px-8 py-3 rounded-lg font-medium flex items-center justify-center space-x-2 hover:bg-gray-800 transition-colors duration-200 touch-manipulation"
             >
               <Mail size={20} />
               <span>Hire Me</span>
@@ -105,17 +116,28 @@ const Hero = () => {
               <span>+91 7010198963</span>
             </motion.a>
             
+            {/* Mobile: mailto link */}
+            <motion.a
+              href="mailto:logeshwaranvelmurugan@gmail.com"
+              className="flex sm:hidden items-center space-x-2 hover:text-gray-900 transition-colors duration-200 touch-manipulation text-sm"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Mail size={18} />
+              <span>Email Me</span>
+            </motion.a>
+            
+            {/* Desktop: Gmail web link */}
             <motion.a
               href="https://mail.google.com/mail/?view=cm&fs=1&to=logeshwaranvelmurugan@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
+              className="hidden sm:flex items-center space-x-2 hover:text-gray-900 transition-colors duration-200 touch-manipulation text-base"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 hover:text-gray-900 transition-colors duration-200 touch-manipulation text-sm sm:text-base break-all sm:break-normal"
             >
               <Mail size={18} />
-              <span className="hidden sm:inline">logeshwaranvelmurugan@gmail.com</span>
-              <span className="sm:hidden">Email Me</span>
+              <span>logeshwaranvelmurugan@gmail.com</span>
             </motion.a>
           </motion.div>
 

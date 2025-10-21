@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Linkedin, Github } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,19 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -34,6 +47,19 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
 
+      // Check if response is OK before parsing JSON
+      if (!response.ok) {
+        // Handle 404 in development
+        if (response.status === 404) {
+          setSubmitStatus({ 
+            type: 'error', 
+            message: 'Email API is only available in production (Vercel deployment). In development, this feature is disabled.' 
+          });
+          return;
+        }
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
 
       if (response.ok) {
@@ -44,7 +70,16 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setSubmitStatus({ type: 'error', message: 'Something went wrong. Please try again later or email me directly.' });
+      
+      // Friendly message for development
+      if (error.message.includes('404') || error.message.includes('Failed to fetch')) {
+        setSubmitStatus({ 
+          type: 'error', 
+          message: 'Contact form is only functional on the live site. For now, please email me directly at logeshwaranvelmurugan@gmail.com' 
+        });
+      } else {
+        setSubmitStatus({ type: 'error', message: 'Something went wrong. Please try again later or email me directly.' });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -61,7 +96,9 @@ const Contact = () => {
       icon: <Mail size={20} />,
       title: "Email",
       value: "logeshwaranvelmurugan@gmail.com",
-      link: "https://mail.google.com/mail/?view=cm&fs=1&to=logeshwaranvelmurugan@gmail.com"
+      getLink: () => isMobile 
+        ? "mailto:logeshwaranvelmurugan@gmail.com"
+        : "https://mail.google.com/mail/?view=cm&fs=1&to=logeshwaranvelmurugan@gmail.com"
     },
     {
       icon: <MapPin size={20} />,
@@ -121,43 +158,48 @@ const Contact = () => {
             </p>
 
             <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center space-x-4"
-                >
-                  <div className="flex items-center space-x-4">
-                    {info.link !== '#' ? (
-                      <motion.a
-                        href={info.link}
-                        target={info.title === "Email" ? "_blank" : "_self"}
-                        rel={info.title === "Email" ? "noopener noreferrer" : ""}
-                        className="block"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <div className="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+              {contactInfo.map((info, index) => {
+                const link = info.getLink ? info.getLink() : info.link;
+                const isExternalLink = link?.startsWith('http');
+                
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-center space-x-4"
+                  >
+                    <div className="flex items-center space-x-4">
+                      {link !== '#' ? (
+                        <motion.a
+                          href={link}
+                          target={isExternalLink ? "_blank" : "_self"}
+                          rel={isExternalLink ? "noopener noreferrer" : ""}
+                          className="block"
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          <div className="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200">
+                            {info.icon}
+                          </div>
+                        </motion.a>
+                      ) : (
+                        <div className="p-3 bg-gray-100 rounded-lg">
                           {info.icon}
                         </div>
-                      </motion.a>
-                    ) : (
-                      <div className="p-3 bg-gray-100 rounded-lg">
-                        {info.icon}
+                      )}
+                      <div>
+                        <h4 className="font-semibold text-gray-900">{info.title}</h4>
+                        <span className="text-gray-600">
+                          {info.value}
+                        </span>
                       </div>
-                    )}
-                    <div>
-                      <h4 className="font-semibold text-gray-900">{info.title}</h4>
-                      <span className="text-gray-600">
-                        {info.value}
-                      </span>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Social Links */}
@@ -302,12 +344,15 @@ const Contact = () => {
             Let's work together to bring your ideas to life with modern, scalable, and user-friendly solutions.
           </p>
           <motion.a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=logeshwaranvelmurugan@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={isMobile 
+              ? "mailto:logeshwaranvelmurugan@gmail.com"
+              : "https://mail.google.com/mail/?view=cm&fs=1&to=logeshwaranvelmurugan@gmail.com"
+            }
+            target={isMobile ? "_self" : "_blank"}
+            rel={isMobile ? "" : "noopener noreferrer"}
+            className="inline-flex items-center space-x-2 bg-white text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center space-x-2 bg-white text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200"
           >
             <Mail size={20} />
             <span>Start a Conversation</span>

@@ -20,10 +20,22 @@ const Footer = () => {
                 <Phone size={16} />
                 <span>+91 7010198963</span>
               </motion.a>
+              {/* Mobile: mailto link */}
               <motion.a
                 href="mailto:logeshwaranvelmurugan@gmail.com"
                 whileHover={{ x: 5 }}
-                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
+                className="flex sm:hidden items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
+              >
+                <Mail size={16} />
+                <span>logeshwaranvelmurugan@gmail.com</span>
+              </motion.a>
+              {/* Desktop: Gmail web link */}
+              <motion.a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=logeshwaranvelmurugan@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ x: 5 }}
+                className="hidden sm:flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
               >
                 <Mail size={16} />
                 <span>logeshwaranvelmurugan@gmail.com</span>
