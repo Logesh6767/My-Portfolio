@@ -38,6 +38,13 @@ const FigmaIcon = () => (
   </svg>
 );
 
+const NodeJsIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4">
+    <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+    <path d="M12 22v-10M12 12L3 7M12 12l9-5" stroke="currentColor" strokeWidth="1.5"/>
+  </svg>
+);
+
 const PHPIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4">
     <ellipse cx="12" cy="12" rx="11" ry="6" fill="currentColor"/>
@@ -120,6 +127,7 @@ const Skills = () => {
       icon: <Database size={24} />,
       skills: [
         { name: "Next.js API", level: 90, icon: <NextJsIcon /> },
+        { name: "Node.js", level: 88, icon: <NodeJsIcon /> },
         { name: "PHP", level: 88, icon: <PHPIcon /> },
         { name: "MySQL", level: 85, icon: <MySQLIcon /> },
         { name: "VB.NET", level: 75, icon: <VBNetIcon /> }
