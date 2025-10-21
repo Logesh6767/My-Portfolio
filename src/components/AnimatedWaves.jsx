@@ -10,7 +10,7 @@ const AnimatedWaves = () => {
           scale: [1, 1.01, 1],
         }}
         transition={{
-          duration: 8,
+          duration: 5,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -43,7 +43,7 @@ const AnimatedWaves = () => {
           scale: [1.01, 0.99, 1.01],
         }}
         transition={{
-          duration: 10,
+          duration: 6,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 1.5,
@@ -77,7 +77,7 @@ const AnimatedWaves = () => {
           scale: [1, 1.015, 1],
         }}
         transition={{
-          duration: 13,
+          duration: 7,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 3,
@@ -111,7 +111,7 @@ const AnimatedWaves = () => {
           scale: [1.005, 0.995, 1.005],
         }}
         transition={{
-          duration: 15,
+          duration: 8,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 4.5,
@@ -148,10 +148,10 @@ const AnimatedWaves = () => {
             scale: [0.6, 1.2, 0.6],
           }}
           transition={{
-            duration: 8 + i * 2,
+            duration: 5 + i * 1.5,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: i * 0.5,
+            delay: i * 0.3,
           }}
           className="absolute rounded-full blur-sm"
           style={{
