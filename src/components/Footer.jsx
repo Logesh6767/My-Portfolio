@@ -86,13 +86,6 @@ const Footer = () => {
               >
                 Experience
               </motion.a>
-              <motion.a
-                href="#projects"
-                whileHover={{ x: 5 }}
-                className="block text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                Projects
-              </motion.a>
             </div>
           </div>
         </div>

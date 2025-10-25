@@ -14,7 +14,7 @@ const Experience = () => {
         "Designed and deployed RESTful APIs with Node.js hosted on Vercel, improving backend response times by 40%.",
         "Built a robust Cypress test automation suite, reducing regression bugs by 50%.",
       ],
-      technologies: ["Next.js", "React.js", "Node.js", "PHP", "Cypress", "Tailwind CSS", "Vercel", "Gemini AI"]
+      technologies: ["Next.js", "React.js", "Node.js", "PHP", "Cypress", "Tailwind CSS", "Vercel", "Gemini AI", "CRM Systems"]
     },
     {
       title: "Full Stack Developer",
@@ -27,7 +27,7 @@ const Experience = () => {
         "Debugged and stabilized a legacy VB.NET CRM system, resolving 20+ production bugs.",
         "Designed mobile-first UI prototypes in Figma, resulting in a 40% boost in user engagement.",
       ],
-      technologies: ["Next.js", "Node.js", "PHP", "VB.NET", "Figma", "CRM Systems"]
+      technologies: ["Next.js", "React.js", "Node.js", "PHP", "Tailwind CSS", "Vercel", "VB.NET", "Figma", "CRM Systems"]
     }
   ];
 
