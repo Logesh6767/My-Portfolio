@@ -1,39 +1,37 @@
 import { motion } from 'framer-motion';
-import { Code, Database, Globe, Smartphone } from 'lucide-react';
+import { Code, Database, Globe, Smartphone, User } from 'lucide-react';
 
 const About = () => {
   const highlights = [
     {
       icon: <Code size={24} />,
-      title: "Full Stack Development",
-      description: "Building scalable web applications with modern technologies"
+      title: "Full Stack Engineering",
+      description: "Building scalable, production-grade applications with clean architecture.",
+      color: "bg-blue-50 text-blue-600",
+      points: ["Scalable Architecture", "Clean Code Practices"]
     },
     {
       icon: <Database size={24} />,
-      title: "API Design",
-      description: "Creating robust RESTful APIs and backend systems"
+      title: "Backend & API Design",
+      description: "Architecting secure, high-performance APIs and database schemas.",
+      color: "bg-purple-50 text-purple-600",
+      points: ["Secure Endpoints", "Performance Optimization"]
     },
     {
       icon: <Globe size={24} />,
-      title: "Modern Frameworks",
-      description: "Expertise in React.js, Next.js, and PHP development"
+      title: "Modern Frontend",
+      description: "Creating responsive, SEO-optimized interfaces with React & Next.js.",
+      color: "bg-pink-50 text-pink-600",
+      points: ["SSR & Static Generation", "Component Reusability"]
     },
     {
       icon: <Smartphone size={24} />,
-      title: "Cross-Platform",
-      description: "Developing mobile apps with React Native and Capacitor"
+      title: "Cross-Platform Mobile",
+      description: "Delivering native-quality mobile apps for iOS and Android.",
+      color: "bg-orange-50 text-orange-600",
+      points: ["Cross-Platform Reach", "Native Functionality"]
     }
   ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -47,52 +45,69 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="py-12 sm:py-16 lg:py-24 bg-white overflow-hidden">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-24 section-gradient relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10 sm:mb-12"
+          className="text-center mb-16 sm:mb-24"
         >
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-3 tracking-tight px-4">
-            About
+          <div className="flex justify-center mb-6">
+            <span className="pill-badge">
+              <User size={14} className="mr-2" />
+              About Me
+            </span>
+          </div>
+          
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6 tracking-tight">
+            Expertise in Modern <br className="hidden sm:block" />
+            <span className="text-gradient">Web Development</span>
           </h2>
-          <div className="w-12 sm:w-16 h-1 bg-gray-900 mx-auto rounded-full"></div>
-          <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-xl mx-auto leading-relaxed mt-4 mb-2 px-4">
-            Full stack developer passionate about crafting clean, scalable digital solutions. I focus on impactful experiences and minimal, purposeful design.
+          
+          <p className="text-lg sm:text-xl text-foreground-secondary max-w-2xl mx-auto leading-relaxed">
+            Full Stack Developer with expertise in React.js, Next.js, and Node.js. Building production-grade applications with clean architecture and scalable infrastructure.
           </p>
         </motion.div>
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"
-        >
-          {highlights.map((item, idx) => (
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          {highlights.map((item, index) => (
             <motion.div
-              key={item.title}
+              key={index}
               variants={itemVariants}
-              whileHover={{ y: -5, scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-white rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6 lg:p-7 flex flex-col items-center text-center hover:shadow-lg transition-all duration-200 touch-manipulation"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+              className="group p-8 rounded-3xl border transition-shadow duration-300 relative flex flex-col items-start bg-white text-foreground border-gray-100 shadow-lg shadow-gray-100 hover:shadow-xl"
             >
-              <div className="mb-2 text-gray-800">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center">
-                  {item.icon}
-                </div>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 ${item.color}`}>
+                {item.icon}
               </div>
-              <h3 className="text-base sm:text-lg font-bold mb-1 text-gray-900 tracking-tight">
+
+              <h3 className="text-xl font-bold mb-3 text-foreground">
                 {item.title}
               </h3>
-              <p className="text-xs sm:text-sm text-gray-500">
+              
+              <p className="text-base leading-relaxed mb-6 flex-grow text-foreground-secondary">
                 {item.description}
               </p>
+
+              <div className="w-full pt-6 border-t mt-auto border-gray-100">
+                 <ul className="space-y-3">
+                    {item.points.map((point, i) => (
+                      <li key={i} className="flex items-center gap-3 text-sm">
+                         <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                         <span className="text-foreground-secondary">{point}</span>
+                      </li>
+                    ))}
+                 </ul>
+              </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

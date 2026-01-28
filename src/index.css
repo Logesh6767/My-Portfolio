@@ -2,20 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 @layer base {
   body {
-    @apply font-sans antialiased;
-    overflow-x: hidden;
+    @apply font-sans bg-background text-foreground overflow-x-hidden antialiased;
   }
   
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     overflow-x: hidden;
+    overscroll-behavior-y: contain;
+    scroll-snap-stop: normal;
   }
   
   * {
-    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@layer utilities {
+  /* Gradient Text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-blue via-accent-purple to-accent-pink;
+  }
+  
+  /* Glass Panel (Light) */
+  .glass-panel {
+    @apply bg-white/40 backdrop-blur-xl border border-white/50 shadow-lg supports-[backdrop-filter]:bg-white/20;
+  }
+  
+  /* Pill Badge */
+  .pill-badge {
+    @apply inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium 
+           bg-white border border-gray-200 text-foreground-secondary shadow-sm;
+  }
+  
+  /* Primary Button (Black) */
+  .btn-primary {
+    @apply px-6 py-3 bg-foreground text-white font-semibold rounded-full 
+           hover:bg-primary-hover transition-all duration-200 
+           hover:scale-105 active:scale-95 shadow-lg;
+  }
+  
+  /* Ghost Button */
+  .btn-ghost {
+    @apply px-6 py-3 bg-transparent text-foreground font-medium 
+           hover:text-foreground-secondary transition-colors duration-200
+           flex items-center gap-2;
+  }
+  
+  /* Card Styles */
+  .card-light {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm 
+           hover:shadow-lg transition-all duration-300;
+  }
+  
+  .card-dark {
+    @apply bg-foreground text-white rounded-2xl border border-gray-800 
+           shadow-xl hover:scale-[1.02] transition-all duration-300;
+  }
+  
+  /* Section Background Gradient */
+  .section-gradient {
+    background: linear-gradient(180deg, #F8F9FC 0%, #EEF1F8 100%);
   }
 }

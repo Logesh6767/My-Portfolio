@@ -1,13 +1,22 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="lvGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- White Background -->
   <rect width="512" height="512" rx="96" fill="#FFFFFF"/>
   
-  <!-- Centered LV Group -->
+  <!-- Centered LV Group with Gradient -->
   <g transform="translate(236, 256)">
     <!-- L Letter -->
-    <path d="M -140 -110 L -90 -110 L -90 70 L -10 70 L -10 110 L -140 110 Z" fill="#000000"/>
+    <path d="M -140 -110 L -90 -110 L -90 70 L -10 70 L -10 110 L -140 110 Z" fill="url(#lvGradient)"/>
     
     <!-- V Letter -->
-    <path d="M 12 -110 L 66 -110 L 108 50 L 150 -110 L 204 -110 L 138 110 L 78 110 Z" fill="#000000"/>
+    <path d="M 12 -110 L 66 -110 L 108 50 L 150 -110 L 204 -110 L 138 110 L 78 110 Z" fill="url(#lvGradient)"/>
   </g>
 </svg>

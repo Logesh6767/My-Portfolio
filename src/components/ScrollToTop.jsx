@@ -29,9 +29,9 @@ const ScrollToTop = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-800 transition-colors duration-200"
+          className="fixed bottom-8 right-8 z-50 bg-white/10 backdrop-blur-md border border-white/20 text-primary p-3 rounded-full shadow-lg hover:bg-white/20 hover:shadow-[0_0_20px_rgba(112,0,255,0.4)] transition-all duration-300 group"
         >
-          <ChevronUp size={24} />
+          <ChevronUp size={24} className="group-hover:-translate-y-1 transition-transform duration-300" />
         </motion.button>
       )}
     </AnimatePresence>

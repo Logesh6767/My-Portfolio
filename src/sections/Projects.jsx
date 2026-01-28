@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Smartphone, Globe, Database, Bot } from 'lucide-react';
+import { ExternalLink, Github, Smartphone, Globe, Database, Bot, FolderOpen } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
     {
       title: "Enterprise CRM Platform",
-      description: "Full-stack client management system with real-time data processing and workflow optimization. Built with modern technologies for scalability and performance.",
+      description: "Client relationship management platform with real-time data processing, automated workflows, and analytics. Built with Next.js and PHP for performance and scalability.",
       technologies: ["Next.js", "PHP", "MySQL", "Tailwind CSS", "Vercel"],
       features: [
         "Real-time data synchronization",
@@ -14,12 +14,13 @@ const Projects = () => {
         "Multi-user role management"
       ],
       icon: <Database size={24} />,
-      category: "Web Application"
+      category: "Web Application",
+      color: "bg-blue-500"
     },
     {
       title: "AI-Integrated Nutrition App",
-      description: "Intelligent dietary analysis platform with Gemini AI integration providing personalized recommendations and nutritional insights.",
-      technologies: ["React.js", "Next.js", "Gemini AI API", "Node.js", "MongoDB"],
+      description: "Dietary analysis platform using Google Gemini API for intelligent meal recommendations and nutritional insights. Full-stack React/Next.js with PostgreSQL.",
+      technologies: ["React.js", "Next.js", "Gemini AI API", "Node.js", "PostgreSQL"],
       features: [
         "AI-powered meal analysis",
         "Personalized nutrition recommendations",
@@ -27,11 +28,12 @@ const Projects = () => {
         "Meal planning system"
       ],
       icon: <Bot size={24} />,
-      category: "AI Application"
+      category: "AI Application",
+      color: "bg-purple-500"
     },
     {
       title: "Cross-Platform Mobile Apps",
-      description: "Native mobile applications developed using React.js and Capacitor with serverless backend architecture for optimal performance.",
+      description: "Cross-platform mobile apps built with React.js and Capacitor. Includes native device integration, offline-first architecture, and Firebase backend.",
       technologies: ["React.js", "Capacitor", "Next.js", "PHP", "Firebase"],
       features: [
         "Cross-platform compatibility",
@@ -40,11 +42,12 @@ const Projects = () => {
         "Native device integration"
       ],
       icon: <Smartphone size={24} />,
-      category: "Mobile Application"
+      category: "Mobile Application",
+      color: "bg-green-500"
     },
     {
       title: "Testing Framework Implementation",
-      description: "Comprehensive automated testing suite using Cypress that reduced deployment risks and improved development confidence.",
+      description: "End-to-end testing framework using Cypress integrated with CI/CD pipelines. Reduced deployment risks by 50% and improved code quality.",
       technologies: ["Cypress", "JavaScript", "CI/CD", "GitHub Actions"],
       features: [
         "End-to-end testing coverage",
@@ -53,7 +56,8 @@ const Projects = () => {
         "Custom testing utilities"
       ],
       icon: <Globe size={24} />,
-      category: "DevOps Tool"
+      category: "DevOps Tool",
+      color: "bg-orange-500"
     }
   ];
 
@@ -79,21 +83,24 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-12 sm:py-16 lg:py-20 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-24 section-gradient relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 px-4">
-            Key Projects & Achievements
+          <span className="pill-badge mb-4">
+            <FolderOpen size={14} className="mr-2" />
+            Portfolio
+          </span>
+          <h2 className="text-4xl font-bold text-foreground mb-4">
+            Featured Development Projects
           </h2>
-          <div className="w-16 sm:w-20 h-1 bg-gray-900 mx-auto mb-4 sm:mb-6"></div>
-          <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-            Innovative solutions that deliver real business value and exceptional user experiences
+          <p className="text-lg text-foreground-secondary max-w-2xl mx-auto">
+            Web applications, CRM systems, and AI-powered solutions built with modern JavaScript frameworks.
           </p>
         </motion.div>
 
@@ -102,125 +109,55 @@ const Projects = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
         >
           {projects.map((project, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
-              whileHover={{ y: -10, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="group relative bg-gradient-to-br from-white via-gray-50 to-white rounded-xl sm:rounded-2xl p-5 sm:p-6 lg:p-8 border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+              whileHover={{ y: -5, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+              className="group relative bg-white rounded-3xl p-8 border border-gray-100 shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:shadow-gray-200/80 transition-shadow duration-300 overflow-hidden"
             >
-              {/* Decorative gradient overlay - different position for variety */}
-              <div className="absolute bottom-0 left-0 w-32 sm:w-40 h-32 sm:h-40 bg-gradient-to-tr from-gray-900/5 to-transparent rounded-tr-full scale-0 opacity-0 -translate-x-12 translate-y-12 group-hover:scale-100 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 ease-out"></div>
-              
-              <div className="flex items-center justify-between mb-5 sm:mb-6 relative z-10">
-                <div className="flex items-center space-x-2 sm:space-x-3">
-                  <motion.div 
-                    className="p-2 sm:p-3 bg-gradient-to-br from-gray-900 to-gray-700 text-white rounded-lg sm:rounded-xl shadow-md group-hover:shadow-xl transition-all duration-300"
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
-                      {project.icon}
-                    </div>
-                  </motion.div>
-                  <span className="text-xs sm:text-sm font-bold text-gray-600 uppercase tracking-wider">
-                    {project.category}
-                  </span>
+              <div className="flex items-center gap-4 mb-6">
+                <div className={`p-3 rounded-2xl text-white shadow-lg ${project.color}`}>
+                  {project.icon}
+                </div>
+                <div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-foreground-secondary mb-1">{project.category}</div>
+                    <h3 className="text-2xl font-bold text-foreground">{project.title}</h3>
                 </div>
               </div>
 
-              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 group-hover:text-gray-800 transition-colors duration-300 relative z-10">
-                {project.title}
-              </h3>
-
-              <p className="text-sm sm:text-base text-gray-600 mb-5 sm:mb-6 leading-relaxed relative z-10">
+              <p className="text-foreground-secondary mb-8 leading-relaxed">
                 {project.description}
               </p>
 
-              <div className="mb-5 sm:mb-6 relative z-10">
-                <h4 className="text-xs sm:text-sm font-bold text-gray-900 mb-3 sm:mb-4 uppercase tracking-wider flex items-center">
-                  <div className="w-1 h-3 sm:h-4 bg-gray-900 rounded-full mr-2"></div>
-                  Key Features
+              <div className="mb-8">
+                <h4 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
+                    <FolderOpen size={16} className="text-blue-500" /> Key Features
                 </h4>
-                <ul className="space-y-2 sm:space-y-2.5">
-                  {project.features.map((feature, idx) => (
-                    <motion.li
-                      key={idx}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: idx * 0.1 }}
-                      className="flex items-start space-x-2 sm:space-x-3 text-gray-600 group/item"
-                    >
-                      <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-gray-800 rounded-full mt-1.5 group-hover/item:scale-125 transition-transform duration-200 flex-shrink-0"></div>
-                      <span className="text-xs sm:text-sm leading-relaxed">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mb-5 sm:mb-6 relative z-10">
-                <h4 className="text-xs sm:text-sm font-bold text-gray-900 mb-2 sm:mb-3 uppercase tracking-wider flex items-center">
-                  <div className="w-1 h-3 sm:h-4 bg-gray-900 rounded-full mr-2"></div>
-                  Technologies
-                </h4>
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {project.technologies.map((tech, idx) => (
-                    <motion.span
-                      key={idx}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: idx * 0.05 }}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white text-gray-700 rounded-md sm:rounded-lg text-xs font-semibold border border-gray-300 shadow-sm hover:bg-gray-50 hover:text-gray-900 transition-all duration-200"
-                    >
-                      {tech}
-                    </motion.span>
-                  ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {project.features.map((feature, i) => (
+                        <div key={i} className="flex items-center text-sm text-foreground-secondary">
+                            <span className="w-1.5 h-1.5 rounded-full bg-gray-300 mr-2" />
+                            {feature}
+                        </div>
+                    ))}
                 </div>
               </div>
 
-              <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 pt-4 border-t border-gray-200 relative z-10">
-                <motion.button
-                  whileHover={{ scale: 1.05, x: 2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center justify-center xs:justify-start space-x-2 text-gray-700 hover:text-gray-900 transition-colors duration-200 group/btn touch-manipulation py-2 xs:py-0"
-                >
-                  <Github size={18} className="group-hover/btn:rotate-12 transition-transform duration-200" />
-                  <span className="text-sm font-semibold">View Code</span>
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05, x: 2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center justify-center xs:justify-start space-x-2 text-gray-700 hover:text-gray-900 transition-colors duration-200 group/btn touch-manipulation py-2 xs:py-0"
-                >
-                  <ExternalLink size={18} className="group-hover/btn:rotate-12 transition-transform duration-200" />
-                  <span className="text-sm font-semibold">Live Demo</span>
-                </motion.button>
+              <div className="flex flex-wrap gap-2 mt-auto pt-6 border-t border-gray-100">
+                {project.technologies.map((tech, i) => (
+                  <span 
+                    key={i} 
+                    className="px-3 py-1 bg-gray-50 text-foreground-secondary text-xs font-medium rounded-full border border-gray-100"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-8 sm:mt-12 px-4"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full sm:w-auto bg-gray-900 text-white px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors duration-200 touch-manipulation"
-          >
-            View All Projects
-          </motion.button>
         </motion.div>
       </div>
     </section>

@@ -14,7 +14,6 @@ const Contact = () => {
   const [submitStatus, setSubmitStatus] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detect if device is mobile
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
@@ -22,7 +21,6 @@ const Contact = () => {
     
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
@@ -41,19 +39,15 @@ const Contact = () => {
     try {
       const response = await fetch('/api/send-email', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
-      // Check if response is OK before parsing JSON
       if (!response.ok) {
-        // Handle 404 in development
         if (response.status === 404) {
           setSubmitStatus({ 
             type: 'error', 
-            message: 'Email API is only available in production (Vercel deployment). In development, this feature is disabled.' 
+            message: 'Email API is only available in production (Vercel deployment).' 
           });
           return;
         }
@@ -63,23 +57,17 @@ const Contact = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setSubmitStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!' });
+        setSubmitStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully.' });
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        setSubmitStatus({ type: 'error', message: data.error || 'Failed to send message. Please try again.' });
+        setSubmitStatus({ type: 'error', message: data.error || 'Failed to send message.' });
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      
-      // Friendly message for development
-      if (error.message.includes('404') || error.message.includes('Failed to fetch')) {
-        setSubmitStatus({ 
-          type: 'error', 
-          message: 'Contact form is only functional on the live site. For now, please email me directly at logeshwaranvelmurugan@gmail.com' 
-        });
-      } else {
-        setSubmitStatus({ type: 'error', message: 'Something went wrong. Please try again later or email me directly.' });
-      }
+      setSubmitStatus({ 
+        type: 'error', 
+        message: 'Something went wrong. Please try again later.' 
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -108,256 +96,148 @@ const Contact = () => {
     }
   ];
 
-  const socialLinks = [
-    {
-      icon: <Linkedin size={24} />,
-      name: "LinkedIn",
-      url: "https://www.linkedin.com/in/logeshwaran-v-607806230"
-    },
-    {
-      icon: <Github size={24} />,
-      name: "GitHub", 
-      url: "https://github.com/Logesh6767"
-    }
-  ];
-
   return (
-    <section id="contact" className="py-12 sm:py-16 lg:py-20 bg-gray-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
-        >
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 px-4">
-            Get In Touch
-          </h2>
-          <div className="w-16 sm:w-20 h-1 bg-gray-900 mx-auto mb-4 sm:mb-6"></div>
-          <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-            Have a project in mind or want to discuss opportunities? I'd love to hear from you!
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
-          {/* Contact Information */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
-              Let's Connect
-            </h3>
-            <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 leading-relaxed">
-              I'm always open to discussing new opportunities, interesting projects, 
-              or just having a conversation about technology and development. 
-              Feel free to reach out through any of the channels below.
-            </p>
-
-            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
-              {contactInfo.map((info, index) => {
-                const link = info.getLink ? info.getLink() : info.link;
-                const isExternalLink = link?.startsWith('http');
-                
-                return (
-                  <motion.div
-                    key={index}
+    <section id="contact" className="py-24 bg-background-secondary relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+            
+            {/* Left Column: Info */}
+            <div>
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-center space-x-4"
-                  >
-                    <div className="flex items-center space-x-4">
-                      {link !== '#' ? (
-                        <motion.a
-                          href={link}
-                          target={isExternalLink ? "_blank" : "_self"}
-                          rel={isExternalLink ? "noopener noreferrer" : ""}
-                          className="block"
-                          whileHover={{ scale: 1.1 }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                        >
-                          <div className="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                            {info.icon}
-                          </div>
-                        </motion.a>
-                      ) : (
-                        <div className="p-3 bg-gray-100 rounded-lg">
-                          {info.icon}
-                        </div>
-                      )}
-                      <div>
-                        <h4 className="font-semibold text-gray-900">{info.title}</h4>
-                        <span className="text-gray-600">
-                          {info.value}
-                        </span>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            {/* Social Links */}
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-4">Follow Me</h4>
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="p-3 bg-gray-100 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-200 transition-all duration-200"
-                  >
-                    {social.icon}
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200"
-                  placeholder="Project discussion, Job opportunity, etc."
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200"
-                  placeholder="Tell me about your project or what you'd like to discuss..."
-                />
-              </div>
-
-              {/* Status Message */}
-              {submitStatus && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`p-4 rounded-lg ${
-                    submitStatus.type === 'success' 
-                      ? 'bg-green-50 text-green-800 border border-green-200' 
-                      : 'bg-red-50 text-red-800 border border-red-200'
-                  }`}
+                    transition={{ duration: 0.6 }}
                 >
-                  {submitStatus.message}
+                    <span className="pill-badge mb-4">
+                        <Mail size={14} className="mr-2" />
+                        Get In Touch
+                    </span>
+                    <h2 className="text-4xl font-bold text-foreground mb-6">
+                        Let's work together
+                    </h2>
+                    <p className="text-lg text-foreground-secondary mb-12 max-w-lg">
+                        Have a project in mind or want to discuss new opportunities? 
+                        I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+                    </p>
+
+                    <div className="space-y-8 mb-12">
+                        {contactInfo.map((item, index) => (
+                            <div key={index} className="flex items-start gap-4">
+                                <div className="p-3 bg-white rounded-full text-foreground border border-gray-100 shadow-sm">
+                                    {item.icon}
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-foreground">{item.title}</h3>
+                                    {item.getLink ? (
+                                        <a href={item.getLink()} className="text-foreground-secondary hover:text-blue-600 transition-colors">
+                                            {item.value}
+                                        </a>
+                                    ) : (
+                                        <a href={item.link} className="text-foreground-secondary hover:text-blue-600 transition-colors">
+                                            {item.value}
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="flex gap-4">
+                        <a href="https://www.linkedin.com/in/logeshwaran-v-607806230/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white rounded-full text-foreground hover:bg-blue-600 hover:text-white transition-all border border-gray-100 shadow-sm">
+                            <Linkedin size={20} />
+                        </a>
+                        <a href="https://github.com/Logesh6767" target="_blank" rel="noopener noreferrer" className="p-3 bg-white rounded-full text-foreground hover:bg-gray-800 hover:text-white transition-all border border-gray-100 shadow-sm">
+                            <Github size={20} />
+                        </a>
+                    </div>
                 </motion.div>
-              )}
+            </div>
 
-              <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className={`w-full px-8 py-3 rounded-lg font-medium flex items-center justify-center space-x-2 transition-colors duration-200 ${
-                  isSubmitting 
-                    ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-gray-900 text-white hover:bg-gray-800'
-                }`}
-              >
-                <Send size={20} className={isSubmitting ? 'animate-pulse' : ''} />
-                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-              </motion.button>
-            </form>
-          </motion.div>
+            {/* Right Column: Form */}
+            <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-white rounded-3xl p-8 border border-gray-100 shadow-xl"
+            >
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <label className="text-sm font-semibold text-foreground">Name</label>
+                            <input 
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleInputChange}
+                                required
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-foreground focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                                placeholder="John Doe"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-semibold text-foreground">Email</label>
+                            <input 
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                required
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-foreground focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                                placeholder="john@example.com"
+                            />
+                        </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                        <label className="text-sm font-semibold text-foreground">Subject</label>
+                        <input 
+                            type="text"
+                            name="subject"
+                            value={formData.subject}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-foreground focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                            placeholder="Project Discussion"
+                        />
+                    </div>
+
+                    <div className="space-y-2">
+                        <label className="text-sm font-semibold text-foreground">Message</label>
+                        <textarea 
+                            name="message"
+                            value={formData.message}
+                            onChange={handleInputChange}
+                            required
+                            rows={4}
+                            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-foreground focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none resize-none"
+                            placeholder="Tell me about your project..."
+                        />
+                    </div>
+
+                    {submitStatus && (
+                        <div className={`p-4 rounded-xl text-sm ${
+                            submitStatus.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
+                        }`}>
+                            {submitStatus.message}
+                        </div>
+                    )}
+
+                    <button 
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full btn-primary flex items-center justify-center gap-2 py-4 text-base"
+                    >
+                        {isSubmitting ? (
+                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        ) : (
+                            <>Send Message <Send size={18} /></>
+                        )}
+                    </button>
+                </form>
+            </motion.div>
         </div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-16 p-8 bg-gray-900 text-white rounded-xl"
-        >
-          <h3 className="text-2xl font-bold mb-4">
-            Ready to Start Your Next Project?
-          </h3>
-          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-            Let's work together to bring your ideas to life with modern, scalable, and user-friendly solutions.
-          </p>
-          <motion.a
-            href={isMobile 
-              ? "mailto:logeshwaranvelmurugan@gmail.com"
-              : "https://mail.google.com/mail/?view=cm&fs=1&to=logeshwaranvelmurugan@gmail.com"
-            }
-            target={isMobile ? "_self" : "_blank"}
-            rel={isMobile ? "" : "noopener noreferrer"}
-            className="inline-flex items-center space-x-2 bg-white text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Mail size={20} />
-            <span>Start a Conversation</span>
-          </motion.a>
-        </motion.div>
       </div>
     </section>
   );

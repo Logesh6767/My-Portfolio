@@ -1,108 +1,152 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { smoothScrollTo } from '../utils/helpers';
+import clsx from 'clsx';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
     { label: 'Experience', href: '#experience' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Contact', href: '#contact' }
+    { label: 'Projects', href: '#projects' },
+    { label: 'Skills', href: '#skills' }
   ];
 
   return (
-    <motion.header 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-14 sm:h-16">
+    <>
+      <header 
+        className={clsx(
+          "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
+          isScrolled && !isMenuOpen
+            ? "bg-white/30 backdrop-blur-xl border-b border-white/20 py-4 shadow-sm supports-[backdrop-filter]:bg-white/20" 
+            : "bg-transparent py-6"
+        )}
+      >
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
-          <motion.button
-            onClick={() => smoothScrollTo('home')}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative font-bold text-lg sm:text-xl text-gray-900 touch-manipulation"
-          >
-            <span className="inline-flex items-center">
-              {/* L - stays fixed */}
-              <span className="inline-block">L</span>
-              
-              {/* ogeshwaran - expands from 0 width (hidden on mobile, expands on desktop hover) */}
-              <span className="hidden md:inline-block max-w-0 opacity-0 overflow-hidden group-hover:max-w-[7.5rem] group-hover:opacity-100 transition-all duration-500 ease-out whitespace-nowrap">
-                ogeshwaran
-              </span>
-              
-              {/* Space between first and last name */}
-              <span className="inline-block">&nbsp;</span>
-              
-              {/* V - stays fixed */}
-              <span className="inline-block">V</span>
-            </span>
-          </motion.button>
+          <a href="#home" className="text-2xl font-bold tracking-tight text-foreground z-50">
+            <span className="text-gradient">LV</span>.
+          </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-6 lg:space-x-8">
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <motion.button
+              <a
                 key={item.label}
-                onClick={() => smoothScrollTo(item.href.substring(1))}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="text-sm lg:text-base text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium"
+                href={item.href}
+                onClick={(e) => smoothScrollTo(e, item.href.substring(1))}
+                className="text-sm font-medium text-foreground-secondary hover:text-foreground transition-colors"
               >
                 {item.label}
-              </motion.button>
+              </a>
             ))}
           </nav>
 
-          {/* Mobile menu button */}
-          <motion.button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            whileTap={{ scale: 0.9 }}
-            className="md:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors duration-200 touch-manipulation"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
-        </div>
+          {/* CTA Button */}
+          <div className="hidden md:block">
+            <a 
+              href="#contact"
+              onClick={(e) => smoothScrollTo(e, 'contact')}
+              className="btn-primary text-sm py-2.5 px-5"
+            >
+              Contact Me
+            </a>
+          </div>
 
-        {/* Mobile Navigation - Full overlay */}
+          {/* Mobile Menu Button - Only visible when menu is closed */}
+          {!isMenuOpen && (
+            <button 
+              className="md:hidden z-50 text-foreground p-1"
+              onClick={() => setIsMenuOpen(true)}
+            >
+              <Menu size={24} />
+            </button>
+          )}
+        </div>
+      </header>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-gray-200 bg-white"
-          >
-            <nav className="flex flex-col py-4">
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.label}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  onClick={() => {
-                    smoothScrollTo(item.href.substring(1));
-                    setIsMenuOpen(false);
-                  }}
-                  className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 font-medium py-3 px-4 text-left text-base touch-manipulation"
-                >
-                  {item.label}
-                </motion.button>
-              ))}
-            </nav>
-          </motion.div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 md:hidden"
+            />
+
+            {/* Menu Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: -20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -20 }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className="fixed top-4 left-4 right-4 z-50 bg-white rounded-3xl overflow-hidden shadow-2xl md:hidden block"
+            >
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-8">
+                  {/* Logo inside menu */}
+                  <span className="text-2xl font-bold tracking-tight text-foreground">
+                    <span className="text-gradient">LV</span>.
+                  </span>
+                  {/* Close Button */}
+                  <button 
+                    onClick={() => setIsMenuOpen(false)} 
+                    className="p-2 -mr-2 text-foreground-secondary hover:text-foreground transition-colors bg-gray-50 rounded-full"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+
+                <nav className="flex flex-col space-y-2">
+                  {navItems.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      onClick={(e) => {
+                        smoothScrollTo(e, item.href.substring(1));
+                        setIsMenuOpen(false);
+                      }}
+                      className="text-lg font-medium text-foreground-secondary hover:text-foreground hover:bg-gray-50 px-4 py-3 rounded-xl transition-all"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                  
+                  <div className="h-px bg-gray-100 my-4 mx-2" />
+                  
+                  <a 
+                    href="#contact"
+                    onClick={(e) => {
+                      smoothScrollTo(e, 'contact');
+                      setIsMenuOpen(false);
+                    }}
+                    className="btn-primary w-full text-center justify-center py-3.5 text-base shadow-lg shadow-blue-200/50"
+                  >
+                    Contact Me
+                  </a>
+                </nav>
+              </div>
+            </motion.div>
+          </>
         )}
-      </div>
-    </motion.header>
+      </AnimatePresence>
+    </>
   );
 };
 
