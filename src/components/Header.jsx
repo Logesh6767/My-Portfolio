@@ -2,11 +2,32 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { smoothScrollTo } from '../utils/helpers';
+import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [portalRoot, setPortalRoot] = useState(null);
+
+  useEffect(() => {
+    // Create a dedicated portal container outside the transformed body
+    const portalContainer = document.createElement('div');
+    portalContainer.id = 'header-portal';
+    portalContainer.style.position = 'fixed';
+    portalContainer.style.top = '0';
+    portalContainer.style.left = '0';
+    portalContainer.style.right = '0';
+    portalContainer.style.zIndex = '40';
+    document.documentElement.appendChild(portalContainer);
+    setPortalRoot(portalContainer);
+
+    return () => {
+      if (portalContainer && portalContainer.parentNode) {
+        portalContainer.parentNode.removeChild(portalContainer);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,7 +45,9 @@ const Header = () => {
     { label: 'Skills', href: '#skills' }
   ];
 
-  return (
+  if (!portalRoot) return null;
+
+  return createPortal(
     <>
       <header 
         className={clsx(
@@ -146,7 +169,8 @@ const Header = () => {
           </>
         )}
       </AnimatePresence>
-    </>
+    </>,
+    portalRoot
   );
 };
 

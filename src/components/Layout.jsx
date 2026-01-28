@@ -8,6 +8,12 @@ const Layout = ({ children }) => {
   const scrollRef = useRef({ current: 0, target: 0, raf: null });
 
   useEffect(() => {
+    // Check if device is mobile (screen width < 1024px)
+    const isMobile = window.innerWidth < 1024;
+    
+    // Skip smooth scroll for mobile devices
+    if (isMobile) return;
+
     const scroll = scrollRef.current;
     scroll.target = window.scrollY;
     scroll.current = window.scrollY;
@@ -28,7 +34,7 @@ const Layout = ({ children }) => {
       scroll.raf = requestAnimationFrame(smoothScroll);
     };
 
-    // Enable smooth scrolling
+    // Enable smooth scrolling (desktop only)
     document.body.style.position = 'fixed';
     document.body.style.top = '0';
     document.body.style.left = '0';

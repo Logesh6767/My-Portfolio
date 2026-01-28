@@ -1,10 +1,19 @@
 // Smooth scroll utility
-export const smoothScrollTo = (elementId) => {
-  const element = document.getElementById(elementId);
+export const smoothScrollTo = (e, elementId) => {
+  if (e) {
+    e.preventDefault();
+  }
+  
+  const targetId = typeof elementId === 'string' ? elementId : e?.currentTarget?.getAttribute('href')?.substring(1);
+  const element = document.getElementById(targetId);
+  
   if (element) {
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
+    const elementPosition = element.offsetTop;
+    const offsetPosition = elementPosition - 80; // Account for fixed header
+    
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
     });
   }
 };
