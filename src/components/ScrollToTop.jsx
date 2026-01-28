@@ -1,14 +1,32 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { scrollToTop } from '../utils/helpers';
+import { createPortal } from 'react-dom';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [portalRoot, setPortalRoot] = useState(null);
+
+  useEffect(() => {
+    // Create a dedicated portal container outside the transformed body
+    const portalContainer = document.createElement('div');
+    portalContainer.id = 'scroll-to-top-portal';
+    portalContainer.style.position = 'fixed';
+    portalContainer.style.zIndex = '9999';
+    portalContainer.style.pointerEvents = 'none';
+    document.documentElement.appendChild(portalContainer);
+    setPortalRoot(portalContainer);
+
+    return () => {
+      if (portalContainer && portalContainer.parentNode) {
+        portalContainer.parentNode.removeChild(portalContainer);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
+      if (window.scrollY > 300) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -19,7 +37,13 @@ const ScrollToTop = () => {
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  return (
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (!portalRoot) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isVisible && (
         <motion.button
@@ -28,13 +52,15 @@ const ScrollToTop = () => {
           exit={{ opacity: 0, scale: 0.8 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 bg-white/10 backdrop-blur-md border border-white/20 text-primary p-3 rounded-full shadow-lg hover:bg-white/20 hover:shadow-[0_0_20px_rgba(112,0,255,0.4)] transition-all duration-300 group"
+          onClick={handleScrollToTop}
+          style={{ pointerEvents: 'auto' }}
+          className="fixed bottom-8 right-8 bg-white/10 backdrop-blur-md border border-white/20 text-primary p-3 rounded-full shadow-lg hover:bg-white/20 hover:shadow-[0_0_20px_rgba(112,0,255,0.4)] transition-all duration-300 group"
         >
           <ChevronUp size={24} className="group-hover:-translate-y-1 transition-transform duration-300" />
         </motion.button>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    portalRoot
   );
 };
 
