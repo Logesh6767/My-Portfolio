@@ -66,7 +66,7 @@ const LogoMarquee = () => {
     { name: 'React', ...BRAND_ICONS.React },
     { name: 'Next.js', ...BRAND_ICONS.NextJS },
     { name: 'Node.js', ...BRAND_ICONS.NodeJS },
-    { name: 'TypeScript', ...BRAND_ICONS.TypeScript },
+    // { name: 'TypeScript', ...BRAND_ICONS.TypeScript },
     { name: 'Tailwind', ...BRAND_ICONS.Tailwind },
     { name: 'PostgreSQL', ...BRAND_ICONS.PostgreSQL },
     { name: 'MySQL', ...BRAND_ICONS.MySQL },

@@ -11,10 +11,10 @@ const Experience = () => {
       type: "Full-time",
       achievements: [
         "Architected and deployed a client-facing CRM system using Next.js and PHP, reducing client feedback cycles by 30% through real-time data synchronization.",
-        "Engineered RESTful APIs with Node.js and deployed on Vercel serverless infrastructure, achieving 40% improvement in backend response times.",
+        "Engineered RESTful APIs with Next.js and deployed on Vercel serverless infrastructure, achieving 40% improvement in backend response times.",
         "Implemented comprehensive Cypress end-to-end testing suite, reducing regression bugs by 50% and accelerating deployment confidence.",
       ],
-      technologies: ["Next.js", "React.js", "Node.js", "PHP", "Cypress", "Tailwind CSS", "Vercel", "Gemini AI", "CRM Systems"]
+      technologies: ["Next.js", "React.js", "PHP", "MySQL", "PostgreSQL", "Cypress", "Tailwind CSS", "Vercel", "Gemini AI", "CRM Systems"]
     },
     {
       title: "Full Stack Developer",
@@ -27,7 +27,7 @@ const Experience = () => {
         "Resolved 20+ critical production bugs in legacy VB.NET CRM system, improving system stability and user satisfaction.",
         "Created mobile-first UI prototypes in Figma based on user research, achieving 40% increase in user engagement metrics.",
       ],
-      technologies: ["Next.js", "React.js", "Node.js", "PHP", "Tailwind CSS", "Vercel", "VB.NET", "Figma", "CRM Systems"]
+      technologies: ["Next.js", "React.js", "PHP", "MySQL", "Tailwind CSS", "VB.NET", "Figma", "CRM Systems"]
     }
   ];
 

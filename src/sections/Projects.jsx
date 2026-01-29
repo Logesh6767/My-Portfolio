@@ -6,7 +6,7 @@ const Projects = () => {
     {
       title: "Enterprise CRM Platform",
       description: "Client relationship management platform with real-time data processing, automated workflows, and analytics. Built with Next.js and PHP for performance and scalability.",
-      technologies: ["Next.js", "PHP", "MySQL", "Tailwind CSS", "Vercel"],
+      technologies: ["Next.js", "PHP", "MySQL", "Tailwind CSS", "Firebase"],
       features: [
         "Real-time data synchronization",
         "Advanced workflow automation",
@@ -20,7 +20,7 @@ const Projects = () => {
     {
       title: "AI-Integrated Nutrition App",
       description: "Dietary analysis platform using Google Gemini API for intelligent meal recommendations and nutritional insights. Full-stack React/Next.js with PostgreSQL.",
-      technologies: ["React.js", "Next.js", "Gemini AI API", "Node.js", "PostgreSQL"],
+      technologies: ["React.js", "Next.js", "Gemini AI API", "PostgreSQL", "Vercel", "Firebase"],
       features: [
         "AI-powered meal analysis",
         "Personalized nutrition recommendations",
@@ -34,7 +34,7 @@ const Projects = () => {
     {
       title: "Cross-Platform Mobile Apps",
       description: "Cross-platform mobile apps built with React.js and Capacitor. Includes native device integration, offline-first architecture, and Firebase backend.",
-      technologies: ["React.js", "Capacitor", "Next.js", "PHP", "Firebase"],
+      technologies: ["React.js", "Capacitor", "Next.js", "PHP", "MySQL", "PostgreSQL", "Firebase"],
       features: [
         "Cross-platform compatibility",
         "Offline functionality",
