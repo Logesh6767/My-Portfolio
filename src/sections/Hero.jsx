@@ -52,7 +52,7 @@ const Hero = () => {
           >
             <span className="pill-badge">
               <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-              Available for Projects
+              Freelancing • Available for Projects
             </span>
           </motion.div>
 
@@ -85,7 +85,7 @@ const Hero = () => {
               View Projects
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="/Logeshwaran_V_Resume.pdf" download className="btn-ghost flex items-center gap-2">
+            <a href="/assets/Logeshwaran V Resume.pdf" download className="btn-ghost flex items-center gap-2">
               <Download size={18} />
               Download CV
             </a>

@@ -40,12 +40,17 @@ const Layout = ({ children }) => {
     document.body.style.left = '0';
     document.body.style.right = '0';
     document.body.style.willChange = 'transform';
-    document.documentElement.style.height = `${document.body.scrollHeight}px`;
+    // Set height after a brief delay to ensure all content is rendered
+    const heightTimer = setTimeout(() => {
+      const totalHeight = document.body.scrollHeight;
+      document.documentElement.style.height = `${totalHeight}px`;
+    }, 50);
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     smoothScroll();
 
     return () => {
+      clearTimeout(heightTimer);
       window.removeEventListener('scroll', handleScroll);
       if (scroll.raf) cancelAnimationFrame(scroll.raf);
       document.body.style.position = '';

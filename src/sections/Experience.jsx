@@ -4,17 +4,30 @@ import { Calendar, MapPin, Briefcase, CheckCircle2 } from 'lucide-react';
 const Experience = () => {
   const experiences = [
     {
+      title: "Freelance Full Stack Developer",
+      company: "Self-Employed",
+      location: "Chennai",
+      period: "Feb 2026 - Present",
+      type: "Freelance",
+      achievements: [
+        "Built and delivered JucyGo, a production e-commerce platform using Next.js, TypeScript, PHP, MySQL, and Razorpay — implementing auth, cart, checkout, admin panel, and full order history.",
+        "Building HealthIn, a cross-platform fitness and nutrition tracking mobile app using React Native (Expo), TypeScript, Zustand, and Supabase, migrating from SQLite to cloud infrastructure for multi-device support.",
+        "Architecting scalable solutions with features including workout logging, weight tracking, macro nutrition analysis, and AI meal image capture via device camera.",
+      ],
+      technologies: ["React Native", "Expo", "Next.js", "TypeScript", "Zustand", "Supabase", "PHP", "MySQL", "Razorpay", "Tailwind CSS"]
+    },
+    {
       title: "Full Stack Developer",
       company: "Easy2Work",
       location: "Chennai",
       period: "May 2024 - Jan 2026",
       type: "Full-time",
       achievements: [
-        "Architected and deployed a client-facing CRM system using Next.js and PHP, reducing client feedback cycles by 30% through real-time data synchronization.",
-        "Engineered RESTful APIs with Next.js and deployed on Vercel serverless infrastructure, achieving 40% improvement in backend response times.",
-        "Implemented comprehensive Cypress end-to-end testing suite, reducing regression bugs by 50% and accelerating deployment confidence.",
+        "Owned full-stack delivery of two company products — a multi-tenant CRM PWA and an AI-powered Nutrition Analysis App, cutting client feedback loops by 30%.",
+        "Engineered scalable REST APIs with Next.js API routes and PHP; optimized MySQL queries via indexing and caching, boosting API response times by 40%.",
+        "Built a Cypress test automation suite that reduced regression bugs by 50% and strengthened CI/CD confidence across releases.",
       ],
-      technologies: ["Next.js", "React.js", "PHP", "MySQL", "PostgreSQL", "Cypress", "Tailwind CSS", "Vercel", "Gemini AI", "CRM Systems"]
+      technologies: ["Next.js", "React.js", "Redux Toolkit", "PHP", "MySQL", "PostgreSQL", "Cypress", "Tailwind CSS", "Vercel", "Gemini AI"]
     },
     {
       title: "Full Stack Developer",
@@ -23,9 +36,9 @@ const Experience = () => {
       period: "October 2023 - April 2024",
       type: "Part-time",
       achievements: [
-        "Developed full-stack features for client-facing CRM application using Next.js, Node.js, and PHP with modern API architecture.",
-        "Resolved 20+ critical production bugs in legacy VB.NET CRM system, improving system stability and user satisfaction.",
-        "Created mobile-first UI prototypes in Figma based on user research, achieving 40% increase in user engagement metrics.",
+        "Contributed to a client-facing CRM using Next.js and PHP, implementing key workflow features.",
+        "Debugged and stabilized a legacy VB.NET backend system, resolving 20+ production issues related to data handling and business logic.",
+        "Designed mobile-first UI prototypes in Figma, leading to a 40% increase in user engagement during pilot testing.",
       ],
       technologies: ["Next.js", "React.js", "PHP", "MySQL", "Tailwind CSS", "VB.NET", "Figma", "CRM Systems"]
     }

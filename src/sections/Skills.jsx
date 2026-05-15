@@ -9,7 +9,8 @@ import {
   PenTool, 
   Workflow, 
   GraduationCap, 
-  Sparkles 
+  Sparkles,
+  Smartphone
 } from 'lucide-react';
 
 const Skills = () => {
@@ -22,10 +23,24 @@ const Skills = () => {
       description: "Building responsive, interactive UIs",
       skills: [
         { name: "JavaScript (ES6+)", type: "core" },
+        { name: "TypeScript", type: "core" },
         { name: "React.js", type: "core" },
         { name: "Next.js", type: "core" },
         { name: "HTML5 / CSS3", type: "core" },
         { name: "Tailwind CSS", type: "core" },
+      ]
+    },
+    {
+      id: "mobile",
+      title: "Mobile Development",
+      icon: <Smartphone className="w-5 h-5 text-pink-600" />,
+      description: "Cross-platform mobile apps",
+      skills: [
+        { name: "React Native", type: "core" },
+        { name: "Expo", type: "core" },
+        { name: "Zustand", type: "core" },
+        { name: "Capacitor", type: "core" },
+        { name: "PWA", type: "core" },
       ]
     },
     {
@@ -35,10 +50,9 @@ const Skills = () => {
       description: "Server-side logic & APIs",
       skills: [
         { name: "Next.js API Routes", type: "core" },
+        { name: "Node.js", type: "core" },
         { name: "PHP", type: "core" },
         { name: "REST APIs", type: "core" },
-        { name: "Node.js", type: "learning" },
-        { name: "Express.js", type: "learning" },
       ]
     },
     {
@@ -49,7 +63,7 @@ const Skills = () => {
       skills: [
         { name: "MySQL", type: "core" },
         { name: "PostgreSQL", type: "core" },
-        { name: "MongoDB", type: "learning" },
+        { name: "SQLite", type: "core" },
       ]
     },
     {
@@ -59,7 +73,7 @@ const Skills = () => {
       description: "Cloud infrastructure",
       skills: [
         { name: "Firebase (Auth, FCM)", type: "core" },
-        { name: "Supabase", type: "core" },
+        { name: "Supabase (Auth, Storage)", type: "core" },
       ]
     },
     {
@@ -82,16 +96,18 @@ const Skills = () => {
       skills: [
         { name: "Figma", type: "core" },
         { name: "UI/UX Design", type: "core" },
+        { name: "Redux Toolkit", type: "core" },
       ]
     },
     {
       id: "practices",
-      title: "Practices",
+      title: "Practices & AI",
       icon: <Workflow className="w-5 h-5 text-rose-600" />,
-      description: "Methodologies & integrations",
+      description: "Methodologies & AI integrations",
       skills: [
         { name: "Agile", type: "core" },
         { name: "Startup Product Dev", type: "core" },
+        { name: "Gemini AI", type: "core" },
         { name: "AI API Integrations", type: "core" },
       ]
     }
