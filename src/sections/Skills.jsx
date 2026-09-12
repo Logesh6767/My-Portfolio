@@ -210,7 +210,7 @@ const Skills = () => {
                         <motion.div 
                             key={category.id}
                             variants={itemVariants}
-                            className="bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-white/40 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08)] hover:bg-white/80 transition-all duration-300 group"
+                            className="bg-white/80 p-6 rounded-2xl border border-white/40 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08)] hover:bg-white/95 transition-all duration-300 group"
                         >
                             <div className="flex items-center gap-3 mb-4">
                                 <div className="p-2.5 bg-white rounded-xl shadow-sm border border-gray-100 group-hover:scale-105 transition-transform duration-300">
@@ -272,7 +272,7 @@ const Skills = () => {
                                      <div className="w-2 h-2 bg-pink-500 rounded-full" />
                                 </div>
 
-                                <div className="bg-white/60 backdrop-blur-sm p-5 rounded-2xl border border-white/50 shadow-sm hover:shadow-md transition-all duration-300">
+                                <div className="bg-white/90 p-5 rounded-2xl border border-white/50 shadow-sm hover:shadow-md transition-all duration-300">
                                     <div className="flex flex-col">
                                         <span className="text-xs font-bold text-pink-600 uppercase tracking-wider mb-1">
                                             {edu.status}

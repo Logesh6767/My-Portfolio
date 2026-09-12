@@ -8,7 +8,7 @@
   }
   
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
     overflow-x: hidden;
     overscroll-behavior-y: contain;
     scroll-snap-stop: normal;
@@ -64,5 +64,14 @@
   /* Section Background Gradient */
   .section-gradient {
     background: linear-gradient(180deg, #F8F9FC 0%, #EEF1F8 100%);
+  }
+}
+
+/* Global: stop all decorative animations when user or browser requests it */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

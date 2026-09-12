@@ -1,68 +1,12 @@
 import Header from './Header';
 import Footer from './Footer';
 import ScrollToTop from './ScrollToTop';
-import { useEffect, useRef } from 'react';
 
+// No JS smooth-scroll loop here anymore.
+// CSS `scroll-behavior: smooth` (set in index.css) runs on the browser's
+// scroll compositor thread — it works correctly even without HW acceleration
+// and never blocks JS interactions.
 const Layout = ({ children }) => {
-  const ease = 0.05;
-  const scrollRef = useRef({ current: 0, target: 0, raf: null });
-
-  useEffect(() => {
-    // Check if device is mobile (screen width < 1024px)
-    const isMobile = window.innerWidth < 1024;
-    
-    // Skip smooth scroll for mobile devices
-    if (isMobile) return;
-
-    const scroll = scrollRef.current;
-    scroll.target = window.scrollY;
-    scroll.current = window.scrollY;
-
-    const handleScroll = () => {
-      scroll.target = window.scrollY;
-    };
-
-    const smoothScroll = () => {
-      scroll.current += (scroll.target - scroll.current) * ease;
-      
-      if (Math.abs(scroll.target - scroll.current) < 0.1) {
-        scroll.current = scroll.target;
-      }
-
-      document.body.style.transform = `translateY(-${scroll.current}px)`;
-
-      scroll.raf = requestAnimationFrame(smoothScroll);
-    };
-
-    // Enable smooth scrolling (desktop only)
-    document.body.style.position = 'fixed';
-    document.body.style.top = '0';
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.willChange = 'transform';
-    // Set height after a brief delay to ensure all content is rendered
-    const heightTimer = setTimeout(() => {
-      const totalHeight = document.body.scrollHeight;
-      document.documentElement.style.height = `${totalHeight}px`;
-    }, 50);
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    smoothScroll();
-
-    return () => {
-      clearTimeout(heightTimer);
-      window.removeEventListener('scroll', handleScroll);
-      if (scroll.raf) cancelAnimationFrame(scroll.raf);
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.transform = '';
-      document.body.style.willChange = '';
-      document.documentElement.style.height = '';
-    };
-  }, []);
-
   return (
     <div className="min-h-screen text-foreground bg-background overflow-x-hidden selection:bg-accent-purple/20 selection:text-foreground">
       <Header />
