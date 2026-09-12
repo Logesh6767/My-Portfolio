@@ -115,6 +115,13 @@ const Skills = () => {
 
   const education = [
     {
+        degree: "Master of Computer Applications (MCA)",
+        institution: "SRM Easwari Engineering College",
+        location: "Chennai, India",
+        year: "2026 – 2028",
+        status: "Pursuing"
+    },
+    {
         degree: "B.Sc Computer Science",
         institution: "Agurchand Manmull Jain College",
         year: "2021 - 2024",
@@ -273,9 +280,12 @@ const Skills = () => {
                                         <h4 className="font-bold text-foreground leading-tight mb-1">
                                             {edu.degree}
                                         </h4>
-                                        <p className="text-sm text-foreground-secondary mb-2">
+                                        <p className="text-sm text-foreground-secondary mb-1">
                                             {edu.institution}
                                         </p>
+                                        {edu.location && (
+                                            <p className="text-xs text-gray-400 mb-1">{edu.location}</p>
+                                        )}
                                         <p className="text-xs text-gray-400 font-medium font-mono">
                                             {edu.year}
                                         </p>
