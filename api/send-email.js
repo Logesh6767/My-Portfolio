@@ -1,4 +1,11 @@
 import nodemailer from 'nodemailer';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
+);
 
 export default async function handler(req, res) {
   // Only allow POST requests
@@ -20,6 +27,15 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Save contact submission to Supabase (non-blocking — email still sends even if DB fails)
+    const { error: dbError } = await supabase
+      .from('contacts')
+      .insert([{ name, email, subject, message }]);
+
+    if (dbError) {
+      console.error('Supabase insert error:', dbError.message);
+    }
+
     // Create transporter using Gmail
     const transporter = nodemailer.createTransport({
       service: 'gmail',
